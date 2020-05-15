@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "e4b2a0be-738a-49fc-8fe8-131ab5191c5c",
+		"name": "Job-Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registration (/clients)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Test Name\",\n\t\"email\":\"email@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create position (/positions)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTH_API_KEY",
+						"value": "3cd5ec03-ff38-4d8d-8bd9-6c1f12b5ff75",
+						"type": "text"
+					},
+					{
+						"key": "AUTH_EMAIL",
+						"value": "email@gmail.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"finance\",\n\t\"location\":\"New York\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/positions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"positions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Job Search (/positions?keyword=&location=)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTH_API_KEY",
+						"value": "81eca4e3-3b12-41a6-a61a-044c1b5af01f",
+						"type": "text"
+					},
+					{
+						"key": "AUTH_EMAIL",
+						"value": "email@gmail.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/positions?keyword=finance&location=new york",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"positions"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "finance"
+						},
+						{
+							"key": "location",
+							"value": "new york"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Position by ID (/positions/{id})",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTH_API_KEY",
+						"value": "3cd5ec03-ff38-4d8d-8bd9-6c1f12b5ff75",
+						"type": "text"
+					},
+					{
+						"key": "AUTH_EMAIL",
+						"value": "email@gmail.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/positions/0cdf7973-49a2-4557-bfe3-731f2f6ec027",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"positions",
+						"0cdf7973-49a2-4557-bfe3-731f2f6ec027"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
