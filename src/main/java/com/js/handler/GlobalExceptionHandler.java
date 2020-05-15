@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -23,7 +24,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.js.exception.ClientNotFoundException;
 import com.js.exception.EmailAlreadyExistException;
+import com.js.exception.PositionNotFoundException;
 import com.js.validation.ApiError;
 
 @ControllerAdvice
@@ -209,4 +212,50 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
 	}
+
+	// BadCredentialsException
+
+	@ExceptionHandler(
+	{ BadCredentialsException.class })
+	public ResponseEntity<Object> handleBadCredentialsException(RuntimeException ex, WebRequest request)
+	{
+		logger.error("400 Status Code", ex);
+
+		String error = "Bad credentials";
+
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+
+		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+	}
+
+	// ClientNotFoundException
+
+	@ExceptionHandler(
+	{ ClientNotFoundException.class })
+	public ResponseEntity<Object> handleClientNotFoundException(RuntimeException ex, WebRequest request)
+	{
+		logger.error("400 Status Code", ex);
+
+		String error = "There is no client with the given parameter";
+
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+
+		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+	}
+
+	// PositionNotFoundException
+
+	@ExceptionHandler(
+	{ PositionNotFoundException.class })
+	public ResponseEntity<Object> handlePositionNotFoundException(RuntimeException ex, WebRequest request)
+	{
+		logger.error("400 Status Code", ex);
+
+		String error = "There is no position with the given parameter";
+
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+
+		return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+	}
+
 }
