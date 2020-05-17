@@ -28,9 +28,14 @@ public class PositionServiceImpl implements PositionService
 	private String serverPort;
 
 	@Autowired
-	public PositionServiceImpl(PositionRepository positionRepository, RestTemplateBuilder restTemplateBuilder)
+	public void setPositionRepository(PositionRepository positionRepository)
 	{
 		this.positionRepository = positionRepository;
+	}
+
+	@Autowired
+	public void setRestTemplate(RestTemplateBuilder restTemplateBuilder)
+	{
 		this.restTemplate = restTemplateBuilder.build();
 	}
 

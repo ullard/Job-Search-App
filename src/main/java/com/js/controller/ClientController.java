@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.js.dto.in.ClientDtoIn;
-import com.js.exception.EmailAlreadyExistException;
 import com.js.service.ClientServiceImpl;
 
 @RestController
@@ -21,14 +20,14 @@ public class ClientController
 	private ClientServiceImpl clientService;
 
 	@Autowired
-	public ClientController(ClientServiceImpl clientService)
+	public void setClientService(ClientServiceImpl clientService)
 	{
 		this.clientService = clientService;
 	}
 
 	@Transactional
 	@PostMapping
-	public String register(@Valid @RequestBody ClientDtoIn clientDto) throws EmailAlreadyExistException
+	public String register(@Valid @RequestBody ClientDtoIn clientDto)
 	{
 		return clientService.register(clientDto);
 	}

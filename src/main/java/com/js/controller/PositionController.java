@@ -26,7 +26,7 @@ public class PositionController
 	private PositionServiceImpl positionService;
 
 	@Autowired
-	public PositionController(PositionServiceImpl positionService)
+	public void setPositionService(PositionServiceImpl positionService)
 	{
 		this.positionService = positionService;
 	}

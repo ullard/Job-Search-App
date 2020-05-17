@@ -21,9 +21,14 @@ public class ClientServiceImpl implements ClientService
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public ClientServiceImpl(ClientRepository clientRepository, @Lazy PasswordEncoder passwordEncoder)
+	public void setClientRepository(ClientRepository clientRepository)
 	{
 		this.clientRepository = clientRepository;
+	}
+
+	@Autowired
+	public void setPasswordEncoder(@Lazy PasswordEncoder passwordEncoder)
+	{
 		this.passwordEncoder = passwordEncoder;
 	}
 
